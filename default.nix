@@ -21,7 +21,7 @@ pkgs.writeShellScriptBin "," ''
       attr="''${argv0}"
       ;;
     *)
-      attr="$(${pkgs.nix-index}/bin/nix-locate --db "''${NIX_INDEX_DB}" --top-level --minimal --at-root --whole-name "/bin/''${argv0}")"
+      attr="$(${pkgs.nix-index}/bin/nix-locate --top-level --minimal --at-root --whole-name "/bin/''${argv0}")"
       if [[ "$(echo "''${attr}" | wc -l)" -ne 1 ]]; then
         attr="$(echo "''${attr}" | ${pkgs.fzf}/bin/fzf)"
       fi
