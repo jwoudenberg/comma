@@ -11,13 +11,6 @@ if [[ $# -lt 1 ]]; then
   exit 1
 fi
 
-if [[ "$1" == "--install" ]] || [[ "$1" == "-i" ]]; then
-  install=1
-  shift
-else
-  install=""
-fi
-
 argv0=$1; shift
 
 case "${argv0}" in
@@ -37,8 +30,4 @@ if [[ -z $attr ]]; then
   exit 1
 fi
 
-if [[ -n $install ]]; then
-  nix-env -iA "nixpkgs.${attr%%.*}"
-else
-  nix run "nixpkgs.${attr}" -c "${argv0}" "$@"
-fi
+nix run "nixpkgs.${attr}" -c "${argv0}" "$@"
