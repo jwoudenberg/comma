@@ -5,11 +5,12 @@ Comma runs software without installing it.
 Basically it just wraps together `nix run` and `nix-index`. You stick a `,` in front of a command to
 run it from whatever location it happens to occupy in `nixpkgs` without really thinking about it.
 
-## Installation
+Changes with the upstream comma:
 
-```bash
-nix-env -i -f .
-```
+- Distributed as a flake.
+- Uses your local `nix-index` database rather than a downloaded copy.
+- Made to work with the 2.4 version of the Nix CLI.
+- Dropped support for the `--install` flag.
 
 ## Usage
 
