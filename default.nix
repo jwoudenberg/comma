@@ -6,7 +6,7 @@ pkgs.writeShellScriptBin "," ''
   # usage example:
   #   $ , yarn --help
   # This finds a derivation providing a bin/yarn, and runs it with `nix run`.
-  # If there are multiple candidates, the user chooses one using `fzy`.
+  # If there are multiple candidates, the user chooses one using `fzf`.
   set -euo pipefail
 
   if [[ $# -lt 1 ]]; then
@@ -21,9 +21,9 @@ pkgs.writeShellScriptBin "," ''
       attr="''${argv0}"
       ;;
     *)
-      attr="$(nix-locate --db "''${NIX_INDEX_DB}" --top-level --minimal --at-root --whole-name "/bin/''${argv0}")"
+      attr="$(${pkgs.nix-index}/bin/nix-locate --db "''${NIX_INDEX_DB}" --top-level --minimal --at-root --whole-name "/bin/''${argv0}")"
       if [[ "$(echo "''${attr}" | wc -l)" -ne 1 ]]; then
-        attr="$(echo "''${attr}" | fzy)"
+        attr="$(echo "''${attr}" | ${pkgs.fzf}/bin/fzf)"
       fi
       ;;
   esac
