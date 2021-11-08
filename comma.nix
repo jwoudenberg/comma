@@ -33,5 +33,5 @@ pkgs.writeShellScriptBin "," ''
     exit 1
   fi
 
-  nix run "nixpkgs.''${attr}" -c "''${argv0}" "$@"
+  nix shell "nixpkgs#''${attr}" -c "''${argv0}" "$@"
 ''
